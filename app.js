@@ -8,12 +8,9 @@
 
 // Aguarda o carregamento completo do DOM antes de executar o código
 document.addEventListener('DOMContentLoaded', function() {
-    // Seleção dos elementos principais do formulário
     const form = document.querySelector('.form');
-    const submitButton = document.querySelector('button[type="submit"]');
     const clearButton = document.createElement('button');
     
-    // Configuração do botão de limpar formulário
     clearButton.type = 'button';
     clearButton.textContent = 'Limpar Formulário';
     clearButton.className = 'btn-clear';
@@ -21,15 +18,8 @@ document.addEventListener('DOMContentLoaded', function() {
     // Adiciona o botão de limpar ao container de botões
     const submitContainer = document.querySelector('.form-submit');
     submitContainer.appendChild(clearButton);
-    
-    // Define foco automático no primeiro campo do formulário
-    const firstInput = document.getElementById('nome');
-    if (firstInput) {
-        firstInput.focus();
-    }
 
     // Base de dados: artistas organizados por gênero musical
-    // Contém 5 artistas por gênero para popular os dropdowns
     const artistsData = {
         rock: [
             'The Beatles', 'Queen', 'Pink Floyd', 'Nirvana', 'Metallica'
@@ -57,14 +47,9 @@ document.addEventListener('DOMContentLoaded', function() {
         ]
     };
 
-    /**
-     * Popula o dropdown "Melhor cantor(a) da história"
-     * Agrupa os artistas por gênero usando optgroup para melhor organização
-     */
     function loadBestArtistsList() {
         const bestArtistSelect = document.getElementById('best-artist');
-        
-        // Mapeamento dos nomes técnicos para nomes de exibição
+
         const genreNames = {
             rock: 'Rock',
             pop: 'Pop',
@@ -76,12 +61,10 @@ document.addEventListener('DOMContentLoaded', function() {
             funk: 'Funk'
         };
         
-        // Cria grupos de opções organizados por gênero
         for (const genre in artistsData) {
             const optgroup = document.createElement('optgroup');
             optgroup.label = genreNames[genre];
             
-            // Adiciona cada artista ao grupo correspondente
             artistsData[genre].forEach(artist => {
                 const option = document.createElement('option');
                 option.value = artist.toLowerCase().replace(/\s+/g, '_');
@@ -93,11 +76,9 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
     
-    // Executa a função de carregamento ao iniciar
     loadBestArtistsList();
 
     // Base de dados: álbuns organizados por artista
-    // Cada artista possui 3 álbuns representativos
     const albumsData = {
         // Rock
         'the_beatles': ['Abbey Road', 'Sgt. Pepper\'s Lonely Hearts Club Band', 'Revolver'],
@@ -158,8 +139,8 @@ document.addEventListener('DOMContentLoaded', function() {
     
     /**
      * Exibe mensagem de erro abaixo do campo
-     * @param {HTMLElement} element - Campo que contém o erro
-     * @param {string} message - Mensagem de erro a ser exibida
+     * @param {HTMLElement} element - Campo de erro
+     * @param {string} message - Mensagem de erro
      */
     function showError(element, message) {
         removeError(element);
@@ -173,8 +154,7 @@ document.addEventListener('DOMContentLoaded', function() {
     }
     
     /**
-     * Remove mensagem de erro do campo
-     * @param {HTMLElement} element - Campo do qual o erro será removido
+     * @param {HTMLElement} element
      */
     function removeError(element) {
         const existingError = element.parentNode.querySelector('.error-message');
@@ -295,7 +275,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     /**
      * Carrega os artistas no dropdown baseado no gênero selecionado
-     * @param {string} genre - Gênero musical selecionado
+     * @param {string} genre
      */
     function loadArtists(genre) {
         const artistSelect = document.getElementById('artist');
@@ -315,7 +295,6 @@ document.addEventListener('DOMContentLoaded', function() {
             artistSelect.innerHTML = '<option value="">Selecione primeiro um gênero musical</option>';
         }
         
-        // Limpa a lista de álbuns ao mudar o gênero
         clearAlbums();
     }
 
@@ -358,9 +337,6 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
 
-    /**
-     * Limpa a lista de álbuns e exibe mensagem padrão
-     */
     function clearAlbums() {
         const albumsList = document.getElementById('albums-list');
         albumsList.innerHTML = '<p class="albums-placeholder">Selecione um artista para ver os álbuns disponíveis</p>';
@@ -380,21 +356,18 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
 
-    // Event Listeners - Gênero Musical
     const musicSelect = document.getElementById('music');
     musicSelect.addEventListener('change', function() {
         loadArtists(this.value);
         removeError(this);
     });
 
-    // Event Listeners - Artista Favorito
     const artistSelect = document.getElementById('artist');
     artistSelect.addEventListener('change', function() {
         loadAlbums(this.value);
         removeError(this);
     });
     
-    // Event Listeners - Máscara de Telefone
     // Formata automaticamente o telefone enquanto o usuário digita
     const phoneInput = document.getElementById('telefone');
     phoneInput.addEventListener('input', function(e) {
@@ -416,7 +389,6 @@ document.addEventListener('DOMContentLoaded', function() {
         e.target.value = value;
     });
     
-    // Event Listeners - Máscara de Data
     // Formata automaticamente a data enquanto o usuário digita (dd/mm/aaaa)
     const dateInput = document.getElementById('nascimento');
     dateInput.addEventListener('input', function(e) {
@@ -436,7 +408,6 @@ document.addEventListener('DOMContentLoaded', function() {
         e.target.value = value;
     });
     
-    // Event Listeners - Validação em tempo real
     // Valida os campos obrigatórios ao perder o foco ou ao digitar (se houver erro)
     const inputs = form.querySelectorAll('input[required], select[required]');
     inputs.forEach(input => {
@@ -483,7 +454,6 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
     
-    // Event Listener - Botão Limpar
     // Reseta o formulário e remove todas as mensagens de erro
     clearButton.addEventListener('click', function() {
         if (confirm('Tem certeza que deseja limpar todos os campos?')) {
@@ -506,7 +476,6 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
     
-    // Event Listener - Submissão do Formulário
     // Valida todos os campos antes de enviar
     form.addEventListener('submit', function(e) {
         e.preventDefault();
