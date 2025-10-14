@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Formulário de registro de perfil e preferências musicais. Cadastre seus gostos musicais, artistas favoritos e álbuns preferidos.">
+    <meta name="author" content="Norton Junior e Renzo Tognella">
+    <title>Perfil e Interesses Musicais</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="app.js" defer></script>
+</head>
+<body>
+    <!-- Cabeçalho principal da página, apresenta o propósito do site -->
+    <header class="header">
+        <h1>Perfil e Interesses Musicais</h1>
+        <p>Registre seus gostos e preferências musicais</p>
+    </header>
+
+    <!-- Área principal do conteúdom, contém o formulário completo -->
+    <main class="main-section">
+        <!-- Usa o atributo novalidate para ter controle total da validação via JavaScript -->
+        <form class="form" method="post" action="#" novalidate aria-labelledby="form-title">
+            <!-- Título invisível para leitores de tela - auxilia na navegação -->
+            <h2 id="form-title" class="sr-only">Formulário de Cadastro Musical</h2>
+            
+            <!-- SEÇÃO 1: Dados Pessoais -->
+            <!-- Coleta as informações básicas do usuário -->
+            <fieldset class="form-section">
+                <legend>Dados de Identificação Pessoal</legend>
+                
+                <div class="form-item">
+                    <label for="nome">Nome completo:</label>
+                    <input 
+                        type="text" 
+                        id="nome" 
+                        name="nome" 
+                        placeholder="Digite seu nome completo" 
+                        required 
+                        autofocus
+                        aria-required="true"
+                        aria-describedby="nome-help">
+                    <small id="nome-help" class="help-text">Informe seu nome completo como aparece nos documentos</small>
+                </div>
+
+                <div class="form-item">
+                    <label for="email">E-mail:</label>
+                    <input 
+                        type="email" 
+                        id="email" 
+                        name="email" 
+                        placeholder="seu@email.com" 
+                        required
+                        aria-required="true"
+                        aria-describedby="email-help">
+                    <small id="email-help" class="help-text">Este e-mail será usado para contato</small>
+                </div>
+
+                <div class="form-item">
+                    <label for="telefone">Telefone:</label>
+                    <input 
+                        type="tel" 
+                        id="telefone" 
+                        name="telefone" 
+                        placeholder="(11) 99999-9999" 
+                        required
+                        aria-required="true"
+                        aria-describedby="telefone-help"
+                        pattern="\(\d{2}\)\s\d{4,5}-\d{4}">
+                    <small id="telefone-help" class="help-text">Formato: (11) 99999-9999</small>
+                </div>
+
+                <div class="form-item">
+                    <label for="nascimento">Data de nascimento:</label>
+                    <input 
+                        type="text" 
+                        id="nascimento" 
+                        name="nascimento" 
+                        placeholder="dd/mm/aaaa"
+                        required
+                        aria-required="true"
+                        aria-describedby="nascimento-help"
+                        pattern="\d{2}/\d{2}/\d{4}"
+                        maxlength="10">
+                    <small id="nascimento-help" class="help-text">Formato: dd/mm/aaaa - Idade mínima: 13 anos</small>
+                </div>
+
+                <div class="form-item">
+                    <label for="foto">Foto de perfil:</label>
+                    <input 
+                        type="file" 
+                        id="foto" 
+                        name="foto" 
+                        accept="image/*"
+                        aria-describedby="foto-help">
+                    <small id="foto-help" class="help-text">Opcional. Formatos aceitos: JPG, PNG, GIF</small>
+                </div>
+            </fieldset>
+
+            <!-- SEÇÃO 2: Preferências Musicais -->
+            <!-- Coleta os gostos musicais do usuário -->
+            <fieldset class="form-section">
+                <legend>Interesses Musicais</legend>
+                
+                <div class="form-item">
+                    <label for="music">Qual é o seu gênero musical favorito?</label>
+                    <select 
+                        id="music" 
+                        name="music"
+                        aria-describedby="music-help">
+                        <option value="">Selecione uma opção</option>
+                        <option value="rock">Rock</option>
+                        <option value="pop">Pop</option>
+                        <option value="jazz">Jazz</option>
+                        <option value="classical">Clássica</option>
+                        <option value="eletronica">Eletrônica</option>
+                        <option value="sertanejo">Sertanejo</option>
+                        <option value="mpb">MPB</option>
+                        <option value="funk">Funk</option>
+                    </select>
+                    <small id="music-help" class="help-text">Escolha o gênero que mais combina com você</small>
+                </div>
+
+                <div class="form-item">
+                    <label for="artist">Artista favorito:</label>
+                    <select 
+                        id="artist" 
+                        name="artist"
+                        aria-describedby="artist-help">
+                        <option value="">Selecione primeiro um gênero musical</option>
+                    </select>
+                    <small id="artist-help" class="help-text">A lista será preenchida após selecionar um gênero</small>
+                </div>
+
+                <!-- Lista de álbuns com checkboxes -->
+                <div class="form-item albums-section">
+                    <label id="albums-label">Álbuns Preferidos (selecione até 3):</label>
+                    <div 
+                        id="albums-list" 
+                        class="albums-list" 
+                        role="group" 
+                        aria-labelledby="albums-label"
+                        aria-describedby="albums-help">
+                        <p class="albums-placeholder">Selecione um artista para ver os álbuns disponíveis</p>
+                    </div>
+                    <small id="albums-help" class="help-text">Você pode marcar até 3 álbuns como favoritos</small>
+                </div>
+
+                <div class="form-item">
+                    <label for="best-artist">Melhor cantor(a) da história:</label>
+                    <select 
+                        id="best-artist" 
+                        name="best-artist"
+                        aria-describedby="best-artist-help">
+                        <option value="">Selecione o(a) melhor cantor(a)</option>
+                        <!-- Opções agrupadas por gênero serão carregadas via JavaScript -->
+                    </select>
+                    <small id="best-artist-help" class="help-text">Na sua opinião, quem é o(a) maior artista de todos os tempos?</small>
+                </div>
+            </fieldset>
+
+            <!-- SEÇÃO 3: Experiência Musical -->
+            <!-- Coleta informações sobre a prática musical do usuário -->
+            <fieldset class="form-section">
+                <legend>Sua Experiência Musical</legend>
+                
+                <div class="form-item">
+                    <label for="instrument">Você toca algum instrumento?</label>
+                    <select 
+                        id="instrument" 
+                        name="instrument"
+                        aria-describedby="instrument-help">
+                        <option value="">Selecione uma opção</option>
+                        <option value="guitar">Violão/Guitarra</option>
+                        <option value="piano">Piano</option>
+                        <option value="drums">Bateria</option>
+                        <option value="bass">Baixo</option>
+                        <option value="violin">Violino</option>
+                        <option value="saxophone">Saxofone</option>
+                        <option value="none">Não toco nenhum</option>
+                    </select>
+                    <small id="instrument-help" class="help-text">Escolha o instrumento principal que você toca</small>
+                </div>
+
+                <div class="form-item">
+                    <label for="experience">Anos de experiência musical:</label>
+                    <input 
+                        type="number" 
+                        id="experience" 
+                        name="experience" 
+                        min="0" 
+                        max="50" 
+                        placeholder="0"
+                        aria-describedby="experience-help">
+                    <small id="experience-help" class="help-text">Quanto tempo você já pratica música? (0 a 50 anos)</small>
+                </div>
+
+                <div class="form-item">
+                    <label for="concert">Já foi a algum show/concerto?</label>
+                    <select 
+                        id="concert" 
+                        name="concert"
+                        aria-describedby="concert-help">
+                        <option value="">Selecione uma opção</option>
+                        <option value="yes">Sim</option>
+                        <option value="no">Não</option>
+                    </select>
+                    <small id="concert-help" class="help-text">Informe se já teve a experiência de assistir música ao vivo</small>
+                </div>
+
+                <div class="form-item">
+                    <label for="comments">Comentários adicionais:</label>
+                    <textarea 
+                        id="comments" 
+                        name="comments" 
+                        rows="3" 
+                        placeholder="Conte-nos mais sobre seus gostos musicais..."
+                        aria-describedby="comments-help"></textarea>
+                    <small id="comments-help" class="help-text">Espaço livre para compartilhar mais sobre sua relação com a música</small>
+                </div>
+            </fieldset>
+
+            <!-- Botões de ação do formulário -->
+            <div class="form-item form-submit">
+                <button type="submit" aria-label="Enviar formulário de cadastro">Enviar Formulário</button>
+                <!-- O botão "Limpar" será adicionado via JavaScript -->
+            </div>
+        </form>
+    </main>
+
+    <!-- Rodapé com informações de copyright -->
+    <footer class="footer">
+        <p>&copy; 2025 - Sistema de Cadastro Musical. Todos os direitos reservados.</p>
+        <p>Desenvolvido por Norton Junior e Renzo Tognella</p>
+    </footer>
+</body>
+</html>

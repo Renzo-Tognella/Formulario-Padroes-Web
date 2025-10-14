@@ -1,0 +1,591 @@
+/*
+ * Folha de Estilos - Sistema de Cadastro Musical
+ * Arquivo: style.css
+ * Descrição: Define os estilos visuais do formulário de cadastro musical
+ * Autores: Norton Junior e Renzo Tognella
+ * Data: 2025
+ */
+
+/* ============================================
+   RESET E ESTILOS GLOBAIS
+   ============================================ */
+
+/* Reset básico para remover margens e paddings padrão do navegador */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box; /* Facilita o cálculo de dimensões */
+}
+
+/* Estilos base do body - define layout flexbox vertical */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    line-height: 1.6; /* Melhora legibilidade do texto */
+    color: #333;
+    min-height: 100vh; /* Garante altura mínima da tela */
+    display: flex;
+    flex-direction: column; /* Empilha header, main e footer */
+}
+
+/* ============================================
+   ACESSIBILIDADE
+   ============================================ */
+
+/* Classe para ocultar conteúdo visualmente, mas mantê-lo acessível para leitores de tela */
+.sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border-width: 0;
+}
+
+/* Melhora o indicador de foco para navegação por teclado */
+*:focus {
+    outline: 3px solid #007bff; /* Azul para destaque */
+    outline-offset: 2px; /* Espaçamento entre o elemento e o outline */
+}
+
+/* ============================================
+   CABEÇALHO
+   ============================================ */
+
+/* Cabeçalho principal */
+.header {
+    background-color: #263890;
+    color: white;
+    text-align: center;
+    padding: 2rem 1rem;
+}
+
+.header h1 {
+    font-size: 2rem;
+    margin-bottom: 0.5rem;
+}
+
+.header p {
+    font-size: 1rem;
+}
+
+/* ============================================
+   ÁREA PRINCIPAL
+   ============================================ */
+
+/* Seção principal que contém o formulário */
+.main-section {
+    flex: 1;
+    padding: 2rem 1rem;
+    background-color: #f0f0f0;
+}
+
+.main-title {
+    text-align: center;
+    padding-bottom: 1.5rem;
+    font-size: 1.8rem;
+    color: #333;
+}
+
+/* ============================================
+   FORMULÁRIO
+   ============================================ */
+
+/* Container principal do formulário - usa grid para layout em 2 colunas */
+.form {
+    width: 100%;
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 2rem;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+    background-color: white;
+    border: 1px solid #ddd;
+    border-radius: 16px;
+}
+
+/* Fieldset - agrupa campos semanticamente por seção */
+.form-section {
+    grid-column: 1 / -1;
+    border: 2px solid #ccc;
+    border-radius: 16px;
+    padding: 1.5rem;
+    margin-bottom: 1rem;
+}
+
+/* Legend do fieldset - título da seção */
+.form-section legend {
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: #263890;
+    padding: 0 0.5rem;
+}
+
+/* Item individual do formulário */
+.form-item {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+/* Textos de ajuda - instruções adicionais para o usuário */
+.help-text {
+    font-size: 0.85rem;
+    color: #666;
+    font-style: italic;
+    margin-top: 0.25rem;
+}
+
+/* Labels dos campos */
+.form-item label {
+    font-size: 1rem;
+    font-weight: bold;
+    margin-bottom: 0.25rem;
+}
+
+/* Estilos base para inputs, selects e textareas */
+.form-item input,
+.form-item select,
+.form-item textarea {
+    padding: 0.5rem;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    font-size: 1rem;
+}
+
+.form-item input[type="file"] {
+    padding: 0.5rem;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    background-color: white;
+}
+
+/* Transição suave para interações do usuário */
+.form-item input:hover,
+.form-item select:hover,
+.form-item textarea:hover {
+    border-color: #263890;
+}
+
+/* Estado de foco - importante para acessibilidade via teclado */
+.form-item input:focus,
+.form-item select:focus,
+.form-item textarea:focus {
+    outline: 2px solid #4CAF50;
+    border-color: #4CAF50;
+}
+
+/* ============================================
+   VALIDAÇÃO E MENSAGENS DE ERRO
+   ============================================ */
+
+/* Mensagens de erro de validação */
+.error-message {
+    color: #d32f2f;
+    font-size: 0.85rem;
+    margin-top: 0.25rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+/* Ícone de erro antes da mensagem */
+.error-message::before {
+    content: "⚠";
+    font-size: 1rem;
+}
+
+/* Campo com erro - borda vermelha para destaque visual */
+.form-item input.error,
+.form-item select.error,
+.form-item textarea.error {
+    border: 2px solid #d32f2f;
+    background-color: #ffe0e0;
+}
+
+/* ============================================
+   SEÇÃO DE ÁLBUNS
+   ============================================ */
+
+/* Container da lista de álbuns */
+#albums-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    margin-top: 1rem;
+    padding: 1rem;
+    background-color: #f5f5f5;
+    border: 1px solid #ddd;
+    border-radius: 12px;
+    max-height: 300px;
+    overflow-y: auto;
+}
+
+/* Cada item de álbum com checkbox */
+.album-item {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem;
+    border-radius: 4px;
+}
+
+/* Destaque ao passar o mouse sobre o álbum */
+.album-item:hover {
+    background-color: #e0e0e0;
+}
+
+/* Checkbox do álbum */
+.album-item input[type="checkbox"] {
+    width: 18px;
+    height: 18px;
+}
+
+/* Label do álbum */
+.album-item label {
+    font-size: 0.95rem;
+    font-weight: normal;
+    margin: 0;
+}
+
+/* ============================================
+   BOTÕES
+   ============================================ */
+
+/* Container dos botões - alinha horizontalmente */
+.form-buttons {
+    grid-column: 1 / -1;
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    margin-top: 1rem;
+}
+
+/* Estilos base para botões */
+.form-buttons button {
+    padding: 0.75rem 2rem;
+    font-size: 1rem;
+    font-weight: bold;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+/* Botão de enviar - verde */
+.btn-submit {
+    background-color: #4CAF50;
+    color: white;
+}
+
+/* Hover do botão de enviar */
+.btn-submit:hover {
+    background-color: #45a049;
+}
+
+/* Botão de limpar - vermelho */
+.btn-clear {
+    background-color: #f44336;
+    color: white;
+}
+
+/* Hover do botão de limpar */
+.btn-clear:hover {
+    background-color: #da190b;
+}
+
+/* Estado de foco dos botões - acessibilidade */
+.form-buttons button:focus {
+    outline: 2px solid #263890;
+}
+
+/* ============================================
+   RODAPÉ
+   ============================================ */
+
+/* Rodapé da página */
+.footer {
+    background-color: #263890;
+    color: white;
+    text-align: center;
+    padding: 1.5rem;
+}
+
+.footer p {
+    margin: 0;
+    font-size: 0.9rem;
+}
+
+/* ============================================
+   RESPONSIVIDADE
+   ============================================ */
+
+/* Tablets e dispositivos menores - altera layout para coluna única */
+@media (max-width: 768px) {
+    .form {
+        grid-template-columns: 1fr; /* Uma coluna */
+        padding: 1rem;
+    }
+    
+    .form-item {
+        grid-column: 1; /* Cada item em sua própria linha */
+    }
+    
+    .main-title {
+        font-size: 1.5rem; /* Título menor */
+    }
+    
+    .form-section legend {
+        font-size: 1.1rem; /* Legend menor */
+    }
+    
+    .form-buttons {
+        flex-direction: column; /* Botões empilhados */
+    }
+    
+    .form-buttons button {
+        width: 100%; /* Botões ocupam largura total */
+    }
+}
+
+/* ============================================
+   VALIDAÇÃO DE FORMULÁRIO
+   ============================================ */
+
+/* Estilos para campos com erro detectado via JavaScript */
+.error {
+    border-color: #e74c3c !important;
+    background-color: #ffe0e0 !important;
+}
+
+/* Mensagens de erro de validação (sobrescrita) */
+.error-message {
+    color: #e74c3c;
+    font-size: 0.85rem;
+    margin-top: 0.25rem;
+    display: block;
+}
+
+/* ============================================
+   ESTILOS ADICIONAIS DE BOTÕES
+   ============================================ */
+
+/* Botão de enviar - estilo verde alternativo */
+.form-submit button[type="submit"] {
+    background: #27ae60;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    padding: 0.75rem 1.5rem;
+    cursor: pointer;
+    font-size: 1rem;
+    font-weight: bold;
+    min-width: 150px;
+}
+
+/* Hover do botão de enviar verde */
+.form-submit button[type="submit"]:hover {
+    background: #229954;
+}
+
+/* Estado ativo do botão de enviar verde */
+.form-submit button[type="submit"]:active {
+    background: #1e8449;
+}
+
+/* Botão de limpar - estilo vermelho alternativo */
+.btn-clear {
+    background: #e74c3c !important;
+    color: white !important;
+    border: none;
+    border-radius: 10px;
+    padding: 0.75rem 1.5rem;
+    cursor: pointer;
+    font-size: 1rem;
+    font-weight: bold;
+    margin-left: 1rem;
+    min-width: 150px;
+}
+
+/* Hover do botão de limpar vermelho */
+.btn-clear:hover {
+    background: #c0392b !important;
+}
+
+/* Estado ativo do botão de limpar vermelho */
+.btn-clear:active {
+    background: #a93226 !important;
+}
+
+/* Ajustes no container dos botões - sobrescrita */
+.form-submit {
+    grid-column: 1 / -1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+    gap: 1rem;
+    margin-top: 1rem;
+}
+
+/* ============================================
+   RODAPÉ ADICIONAL
+   ============================================ */
+
+/* Rodapé da página - estilo alternativo */
+.footer {
+    background: #2c3e50;
+    color: white;
+    text-align: center;
+    padding: 1.5rem 1rem;
+    margin-top: auto;
+}
+
+/* Parágrafos do rodapé */
+.footer p {
+    margin-bottom: 0.5rem;
+    font-size: 0.9rem;
+}
+
+/* Último parágrafo do rodapé */
+.footer p:last-child {
+    margin-bottom: 0;
+}
+
+/* ============================================
+   RESPONSIVIDADE ADICIONAL
+   ============================================ */
+
+/* Tablets e dispositivos menores - ajustes extras */
+@media (max-width: 768px) {
+    .main-section {
+        padding: 1rem 0.5rem; /* Padding reduzido */
+    }
+    
+    .form {
+        padding: 1.5rem;
+        grid-template-columns: 1fr; /* Uma coluna */
+    }
+    
+    .main-title {
+        font-size: 1.8rem; /* Título menor */
+    }
+    
+    .header h1 {
+        font-size: 2rem; /* Cabeçalho menor */
+    }
+    
+    .header p {
+        font-size: 1rem; /* Texto menor */
+    }
+    
+    /* Botões empilhados verticalmente */
+    .form-submit {
+        flex-direction: column;
+        gap: 0.75rem;
+    }
+    
+    .btn-clear {
+        margin-left: 0; /* Remove margem em modo mobile */
+    }
+    
+    /* Botões ocupam largura total em mobile */
+    .form-submit button[type="submit"],
+    .btn-clear {
+        width: 100%;
+        min-width: auto;
+    }
+    
+    /* Ajusta altura máxima da lista de álbuns */
+    .albums-list {
+        max-height: 300px;
+    }
+}
+
+/* ============================================
+   SEÇÃO DE ÁLBUNS ESTENDIDA
+   ============================================ */
+
+/* Seção que contém a lista de álbuns */
+.albums-section {
+    grid-column: 1 / -1;
+}
+
+/* Lista de álbuns com grid layout */
+.albums-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 0.75rem;
+    padding: 1rem;
+    background-color: #f5f5f5;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    max-height: 400px;
+    overflow-y: auto;
+}
+
+/* Item individual de álbum */
+.album-item {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem;
+    background-color: white;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+
+/* Hover em item de álbum */
+.album-item:hover {
+    background-color: #e8f4f8;
+    border-color: #999;
+}
+
+/* Checkbox do item de álbum */
+.album-item input[type="checkbox"] {
+    width: 18px;
+    height: 18px;
+}
+
+/* Label do item de álbum */
+.album-item label {
+    margin: 0;
+    font-size: 0.95rem;
+    font-weight: normal;
+    flex: 1;
+}
+
+/* Placeholder quando nenhum álbum está disponível */
+.albums-placeholder {
+    grid-column: 1 / -1;
+    text-align: center;
+    color: #666;
+    font-style: italic;
+    padding: 2rem;
+}
+
+/* ============================================
+   SCROLLBAR PERSONALIZADA
+   ============================================ */
+
+/* Largura da scrollbar na lista de álbuns */
+.albums-list::-webkit-scrollbar {
+    width: 8px;
+}
+
+/* Track (fundo) da scrollbar */
+.albums-list::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+
+/* Thumb (alça) da scrollbar */
+.albums-list::-webkit-scrollbar-thumb {
+    background: #888;
+}
+
+/* Hover da thumb da scrollbar */
+.albums-list::-webkit-scrollbar-thumb:hover {
+    background: #555;
+}
